@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "proptypes";
+import { getLeads } from "../../actions/leads";
 
 export class Leads extends Component {
   render() {
@@ -10,4 +13,4 @@ export class Leads extends Component {
   }
 }
 
-export default Leads;
+export default connect(Leads);

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GET_LEADS } from "./types";
 
-export const getLeads = () => disptach => {
+export const getLeads = () => dispatch => {
   axios
     .get("/api/leads/")
     .then(response => {

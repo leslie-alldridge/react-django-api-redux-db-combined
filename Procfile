@@ -1,3 +1,3 @@
-web: gunicorn leadmanager/leadmanager.wsgi
+web: python project/manage.py runserver 0.0.0.0:$PORT --noreload
 
 release: python manage.py migrate

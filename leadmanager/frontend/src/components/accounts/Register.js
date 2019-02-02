@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-// import { register } from "../../actions/auth";
+import { register } from "../../actions/auth";
 import { createMessage } from "../../actions/messages";
 
 export class Register extends Component {
@@ -100,12 +100,11 @@ export class Register extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   isAuthenticated: state.auth.isAuthenticated
-// });
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
 
-// export default connect(
-//   mapStateToProps,
-//   { register, createMessage }
-// )(Register);
-export default Register;
+export default connect(
+  mapStateToProps,
+  { register, createMessage }
+)(Register);

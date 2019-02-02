@@ -52,7 +52,7 @@ class App extends Component {
 
 ReactDOM.render(
   <div>
-    <Favicon url="http://oflisback.github.io/react-favicon/public/img/github.ico" />
+    <Favicon url="https://oflisback.github.io/react-favicon/public/img/github.ico" />
     <App />
   </div>,
   document.getElementById("app")

@@ -11,21 +11,10 @@ import {
 } from "./types";
 //Check token and load user
 export const loadUser = () => (dispatch, getState) => {
-  //Set to loading
-  dispatch({
-    type: USER_LOADING
-  });
-  //Get token
-  const token = getState().auth.token;
-  //Headers
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-  if (token) config.headers["Authorization"] = `Token ${token}`;
+  dispatch({ type: USER_LOADING });
+
   axios
-    .get("/api/auth/user", config)
+    .get("/api/auth/user", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: USER_LOADED,
@@ -70,17 +59,8 @@ export const login = (username, password) => dispatch => {
 
 //logout
 export const logout = () => (dispatch, getState) => {
-  //Get token
-  const token = getState().auth.token;
-  //Headers
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-  if (token) config.headers["Authorization"] = `Token ${token}`;
   axios
-    .post("/api/auth/logout", null, config)
+    .post("/api/auth/logout", null, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: LOGOUT_SUCCESS,
@@ -90,4 +70,21 @@ export const logout = () => (dispatch, getState) => {
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
     });
+};
+
+//setup config with token (helper function)
+
+export const tokenConfig = getState => {
+  //Get token
+  const token = getState().auth.token;
+  //Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  //token to authorization header
+  if (token) config.headers["Authorization"] = `Token ${token}`;
+
+  return config;
 };

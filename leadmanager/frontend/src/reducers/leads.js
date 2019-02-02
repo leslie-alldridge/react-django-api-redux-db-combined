@@ -21,6 +21,11 @@ export default function(state = initialState, action) {
         ...state,
         leads: [...state.leads, action.payload]
       };
+    case LOGOUT_SUCCESS:
+    return {
+      ...state,
+      leads: []
+    };
     default:
       return state;
   }

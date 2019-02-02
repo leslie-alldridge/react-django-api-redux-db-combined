@@ -11,9 +11,14 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+# heroku imports
+import dj_database_url
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# heroku root directory
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -127,3 +132,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Further heroku django DB config
+
+# Change 'default' database configuration with $DATABASE_URL.
+DATABASES['default'].update(dj_database_url.config(
+    conn_max_age=500, ssl_require=False))
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
